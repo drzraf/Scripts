@@ -121,8 +121,8 @@
       function __destruct()
         {
           $this->stopDownloads();
-          if ((self::$ref <= 1) and file_exists($this->cookie_file))
-              unlink($this->cookie_file);
+          if ((self::$ref <= 1) and file_exists($this->cookie_file . ".new"))
+              unlink($this->cookie_file . ".new");
           self::$ref--;
         }
 
@@ -163,7 +163,7 @@
           if ($this->cookies == true)
             {
               curl_setopt($process, CURLOPT_COOKIEFILE, $this->cookie_file);
-              curl_setopt($process, CURLOPT_COOKIEJAR, $this->cookie_file);
+              curl_setopt($process, CURLOPT_COOKIEJAR, $this->cookie_file.".new");
             }
           if ($this->proxy)
               $this->setProxy($process, $this->proxy);
@@ -199,7 +199,7 @@
           if ($this->cookies == true)
             {
               curl_setopt($process, CURLOPT_COOKIEFILE, $this->cookie_file);
-              curl_setopt($process, CURLOPT_COOKIEJAR, $this->cookie_file);
+              curl_setopt($process, CURLOPT_COOKIEJAR, $this->cookie_file.".new");
             }
           if ($this->proxy)
               $this->setProxy($process, $this->proxy);
